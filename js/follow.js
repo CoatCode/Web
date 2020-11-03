@@ -1,7 +1,5 @@
 const log = console.log();
 
-// const getUserData = getUserId('userId');
-
 let isFollowed = false;
 
 const followClickEvent = () => {
@@ -15,6 +13,7 @@ const followClickEvent = () => {
         } else {
             unFollow();
         }
+        profileHeader();
     });
 }
 
@@ -36,6 +35,7 @@ const profileHeader = () => {
     $.ajax({
         url : `http://10.80.161.202:8080/user/${getUserId('userId')}/posts`,
         type : 'GET',
+        //팔로우가 되었는걸 get하는게 오류뜸
         beforeSend : function(xhr){
             // ajaxCountNum = ajaxCountNum + 1;
             xhr.setRequestHeader("Content-type","application/json");
@@ -102,10 +102,10 @@ const profileContent = () => {
 
 $(() => {
     followState();
-    changeBtn();
     profileHeader();
     profileContent();
     followClickEvent();
+    changeBtn();
 })
 
 const getUserId = (name) => {
@@ -160,21 +160,21 @@ const unFollow = () => {
 const followState = () => {
     $.ajax({
         url : `http://10.80.161.202:8080/user/${getUserId('userId')}/follow`,
-        type : 'get',
+        type : 'GET',
         beforeSend : function(xhr){
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.setRequestHeader('Authorization', `Bearer ${sessionStorage.getItem('userAccessToken')}`);
         },
         success : function(res) {
-            // if (res.responseText === '"{"message":["이미 팔로우 한 유저입니다."]}"') {
-            //     isFollowed = !isFollowed;
-            // } else {
-            //     isFollowed = !isFollowed;
-            // }
+            console.log(res);
+            isFollowed = false;
+            
         },
         error : function(res){
             console.log(res);
+            isFollowed = true;
         },
+        async: false,
         dataType : 'JSON',
         contentType : 'application/json; charset=utf-8'
     });
