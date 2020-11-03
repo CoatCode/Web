@@ -127,6 +127,7 @@ body{
 
 .LikeIconImg img{
     width: 50px;
+    cursor: pointer;
 }
 
 .likeImg{
@@ -134,6 +135,7 @@ body{
     margin-left: 30%;
     margin-right: 10px;
     margin-bottom: 5px;
+    cursor: pointer;
 }
 
 .CommentIconImg img{
