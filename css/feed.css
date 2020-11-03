@@ -1,0 +1,285 @@
+@import 'font.css';
+@import 'duplication.css';
+
+body{
+    background-color: #f2f2f2;
+}
+
+.headContainer{
+    background-color: #fcfcfc;
+}
+
+.head{
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    display: flex;
+}
+
+.head h2{
+    width: 190px;
+    height: 80px;
+    font-size: 60px;
+    font-family: MontserratSubrayada;
+}
+
+.search input[type = "text"]{
+    font-size: 20px;
+    font-family: Noto Sans;
+}
+
+.search input{
+    width: 520%;
+    height: 50px;
+    margin-top: 26px;
+    border-radius: 8px;
+    border: solid 1px #afafaf;
+    background-color: #fcfcfc;
+}
+
+.search{
+    height: 130px;
+    margin-left: 50px;
+}
+
+.profile{
+    margin-left: 1250px;
+    margin-top: 26px;
+}
+
+.profile img{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+}
+
+.line{
+    text-align: center;
+}
+
+.line hr{
+    width: 90%;
+    height: 2px;
+    background-color: #333333;
+    margin-left: 72px;
+}
+
+.nav{
+    display: flex;
+    margin-left: 530px;
+    height: 100%;
+    width: 300px;
+}
+
+.nav .navContainer{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.nav ul li{
+    list-style: none;
+    float: left;
+    line-height: 100px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.nav .navMenu {
+    text-decoration: none;
+    color: rgba(51, 51, 51, 0.5);
+    display: block;
+    width: 200px;
+    font-size: 46px;
+    font-weight: bold;
+    font-family: Noto Sans;
+}
+
+.navMenu:hover{
+    color: #333333;
+}
+
+.feedArea{
+    margin-left: 610px;
+}
+
+.feed{    
+    width: 50%;
+    height: 70%;
+    background-color: #fcfcfc;
+    margin-top: 14px;
+}
+
+.iconImg img{
+    width: 50px;
+    height: 50px;
+}
+
+.feedHead{
+    display: flex;
+}
+
+.feedLike_And_Comment{
+    display: flex;
+}
+
+.LikeIconImg img{
+    width: 50px;
+}
+
+.likeImg{
+    margin-top: 5px;
+    margin-left: 30%;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.CommentIconImg img{
+    width: 50px;
+}
+
+.commentImg{
+    margin-top: 5px;
+    margin-left: 30%;
+    margin-bottom: 5px; 
+}
+
+.postmanName{
+    height: 50px;
+    margin-top: 2.2%;
+    margin-left: 2%;
+}
+
+.postmanName span{
+    font-family: "Noto Sans KR";
+    font-size: 22px;
+}
+
+.postmanName{
+    margin-top: 24px;
+    font-size: 20px;
+    margin-right: 65%;
+}
+
+.disuniteLine{
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+.disuniteLine hr{
+    border: solid 1px #DBDBDB;
+}
+
+.feedWrite{
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    bottom: 2%;
+    right: 2%;   
+    /* float: right; */
+}
+
+.writeBtn {
+    margin-right: 2%;
+}
+
+.writeImg {
+    float: right;
+    width: 80px;
+    height: 80px;
+}
+
+.ImgArea{
+    width: 100%;
+    height: 75%;
+}
+
+.postmanProfile{
+    width: 60px;
+    height: 60px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 10px;
+}
+
+.postmanProfile img{
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+}
+
+.title{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 3%;
+}
+
+.view_more{
+    width: 50px;
+    height: 50px;
+}
+
+.viewMoreArea{
+    margin-left: 72%;
+}
+
+.thumbanilImg{
+    width: 100%;
+    height: 100%;
+}
+
+.thumbanilImg img{
+    width: 96%;
+    height: 76%;
+    margin-left: 13px;
+}
+
+.commenterProfile{
+    height: 50px;
+    width: 50px;
+    margin-left: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.commenterProfile img{
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+}
+
+.feedComment{
+    display: flex;
+}
+
+.commenter{
+    margin-top: 6px;
+    margin-left: 10px;
+}
+
+.name span{
+    font-family: "Noto Snas KR";
+    font-size: 22px;
+}
+
+.comment span{
+    font-family: "Noto Snas KR";
+}
+
+.content{
+    margin-left: 3%;
+}
+
+.content span{
+    font-size: 22px;
+    font-family: 'Noto Sans KR';
+}
+
+.tag{
+    margin-top: 4%;
+    margin-left: 3%;
+}

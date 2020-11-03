@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/Js Library/sha512.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
+  <title>Coatcode회원가입</title>
+</head>
+<body>
+  <form id="signForm" method="POST" enctype="multipart/form-data" action=""></form>
+    <div class="center">
+      <div class="logoAndText">
+        <h1>
+          <img src="#" alt="#">
+          COCO
+        </h1>        
+        
+      <div class ="inputFileArea">
+      <div>
+        <div class="inputArea">
+          <input type="email" name="email" id="email" autocomplete="off" required>
+          <label for="email">Email</label>
+        </div>
+
+        <div class="inputArea">
+          <input type="text" name="pw" id="pw" autocomplete="off" required>
+          <label for="PW">PW</label>
+        </div>
+
+        <div class="inputArea">
+          <input type="text" name="name" id="name" autocomplete="off" required>
+          <label for="name">Name</label>
+        </div>
+      </div>
+
+        <div class="fileArea">
+          <label for="upImgFile">업로드</label>
+          <input type="file" id="upImgFile" required>
+        </div>
+      </div>
+
+        <div class="btnArea">
+          <button id="btn" type="submit">DONE</button>
+        </div>
+        
+        <div class="Login">
+          <a href="login.html">이미 회원이신가요?</a>
+        </div>
+      </div>    
+    </div>
+    <script src="/js/signup.js"></script>
+</body>
+</html>

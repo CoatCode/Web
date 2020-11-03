@@ -1,0 +1,304 @@
+@import 'font.css';
+@import 'duplication.css';
+
+body{
+    background-color: #f2f2f2;
+}
+
+.headContainer{
+    background-color: #fcfcfc;
+}
+
+.head{
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    display: flex;
+}
+
+.head h2{
+    width: 190px;
+    height: 80px;
+    font-size: 60px;
+    font-family: MontserratSubrayada;
+}
+
+.search input[type = "text"]{
+    font-size: 20px;
+    font-family: Noto Sans;
+}
+
+.search input{
+    width: 520%;
+    height: 50px;
+    margin-top: 26px;
+    border-radius: 8px;
+    border: solid 1px #afafaf;
+    background-color: #fcfcfc;
+}
+
+.search{
+    height: 130px;
+    margin-left: 50px;
+}
+
+.profile{
+    margin-left: 1250px;
+    margin-top: 26px;
+}
+
+.profile img{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+}
+
+.line{
+    text-align: center;
+}
+
+.line hr{
+    width: 90%;
+    height: 2px;
+    background-color: #333333;
+    margin-left: 72px;
+}
+
+.nav{
+    display: flex;
+    margin-left: 530px;
+    height: 100%;
+    width: 300px;
+}
+
+.nav .navContainer{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.nav ul li{
+    list-style: none;
+    float: left;
+    line-height: 100px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.nav .navMenu {
+    text-decoration: none;
+    color: rgba(51, 51, 51, 0.5);
+    display: block;
+    width: 200px;
+    font-size: 46px;
+    font-weight: bold;
+    font-family: Noto Sans;
+}
+
+.navMenu:hover{
+    color: #333333;
+}
+
+.feedArea{
+    background-color: #fcfcfc;
+    width: 800px;
+    height: 770px;
+    margin-left: 19%;
+    margin-top: 1%;
+}
+
+.detail{
+    display: flex;
+}
+
+.feedPicture{
+    width: 800px;
+    height: 520px;
+}
+
+.feedPicture img{
+    width: 800px;
+    height: 520px;
+}
+
+.title{
+    margin-left: 2%;
+}
+
+.title span{
+    font-size: 46px;
+    font-family: "Noto Sans KR";
+}
+
+.content{
+    margin-left: 2%;
+    margin-top: 1%;
+}
+
+.content span{
+    font-size: 22px;
+    font-family: "Noto Sans KR";
+}
+
+.tag span{
+    font-size: 20px;
+    font-family: 'Noto Sans KR';
+}
+
+.tag{
+    margin-left: 2%;
+    margin-top: 5%;
+    margin-bottom: 1%;
+}
+
+.disuniteLine{
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 2px;
+}
+
+.disuniteLine hr{
+    border: solid 1px #DBDBDB;
+}
+
+.iconArea{
+    display: flex;
+}
+
+.likeIcon{
+    width: 64px;
+    height: 64px;
+    margin-left: 1%;
+}
+
+.likeIcon img{
+    width: 64px;
+    height: 64px;
+}
+
+.viewIcon{
+    width: 64px;
+    height: 64px;
+    margin-left: 2%;
+}
+
+.viewIcon img{
+    width: 64px;
+    height: 64px;
+}
+
+.viewCount{
+    margin-top: 2%;
+    margin-left: 1%;
+}
+
+.viewCount span{
+    font-size: 20px;
+    font-family: 'Noto Sans KR';
+}
+
+.commentArea{
+    background-color: #fcfcfc;
+    width: 400px;
+    height: 770px;
+    margin-top: 1%;
+}
+
+#commentBox{
+    width: 100%;
+    height: 75px;
+}
+
+.postManProfileImg{
+    width: 80px;
+    height: 80px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.postManProfileImg img{
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+}
+
+.postManProfileInfo{
+    display: flex;
+}
+
+.postManName{
+    margin-top: 8%;
+    margin-left: 4%;
+}
+
+.postManName span{
+    font-size: 22px;
+    font-family: 'Noto Sans KR';
+}
+
+.viewCommentArea{
+    display: flex;
+    height: 590px;
+    flex-wrap: wrap;
+}
+
+.viewCommentArea > div {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.commenterProfile{
+    height: 50px;
+    width: 50px;
+    margin-left: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.commenterProfile img{
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+}
+
+.feedComment{
+    display: flex;
+}
+
+.commenter{
+    margin-top: 6px;
+    margin-left: 10px;
+}
+
+.name span{
+    font-family: "Noto Snas KR";
+    font-size: 22px;
+}
+
+.comment {
+    display: flex;
+}
+
+.comment img{
+    width: 44px;
+    height: 44px;
+    margin-top: 16px;
+}
+
+.comment span{
+    font-family: "Noto Snas KR";
+}
+
+.commetMoreView{
+    margin-left: 47%;
+    margin-top: 3%;
+}
+
+.commetMoreView img{
+    width: 40px;
+    height: 40px;
+}

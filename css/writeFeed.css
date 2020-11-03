@@ -1,0 +1,47 @@
+@import 'font.css';
+@import 'duplication.css';
+
+body{
+    background-color: #f2f2f2;
+}
+
+/* .fileArea{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.fileArea label {
+    display: flex;
+    padding: .5em .75em;
+    color: #fcfcfc  ;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #222222;
+    cursor: pointer;
+    border: 1px solid #222222;
+    border-radius: .25em;
+    -webkit-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+}
+  
+.fileArea label:hover {
+    background-color: #555555;
+}
+  
+.fileArea label:active {
+    background-color: #222222;
+}
+  
+.fileArea input[type="file"]{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+} */

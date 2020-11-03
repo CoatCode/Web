@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/signIN.css">
+    <script src="/Js Library/sha512.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>CoatCode로그인</title>
+</head>
+<body>
+  <form id="signForm" action="" method="POST"></form>
+    <div class="center">  
+      <div class="logoAndText">
+        <h1> 
+          <img class="logo" src="/picture/Icon/Group 18.jpg" alt="#">
+          <!-- <img src="/picture/Icon/more.png" alt=""> -->
+          COCO
+        </h1> 
+      </div>
+
+      <div class="inputArea">
+        <input type="email" name="email" id="email" autocomplete="off" required>
+        <label for="email">Email</label>
+      </div>
+
+      <div class="inputArea">
+        <input type="password" name="pw" id="pw" autocomplete="off" required>
+        <label for="PW">PW</label>
+      </div>
+
+      <div class="btnArea">
+        <button id="joinBtn" type="submit">Login</button>
+      </div>
+
+      <div class="Login">
+        <a href="SignUp.html">회원이 아니신가요?</a>
+      </div>
+
+      <div class="snsBtn">
+        <button id="snsBtn" type="button"></button>
+      </div>
+    </div>
+
+    <script src="/js/join.js"></script>
+
+</body>
+</html>

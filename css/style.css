@@ -1,0 +1,153 @@
+@import 'font.css';
+@import 'duplication.css';
+
+/* 초기화 */
+
+body{
+    background-color: rgb(51, 51, 51, .40);
+    background-image: url(/picture/123.png);
+    background-size: cover;
+}
+
+/* center */
+
+.center{
+    width: 960px;
+    height: 560px;
+    margin: 0 auto;
+    margin-top: 200px;
+    background-color: #fcfcfc;
+    border-radius: 18px;
+    box-shadow: 20px 20px 10px rgb(51, 51, 51, .20);
+    border: solid 1px #dbdbdb;
+}
+
+/* logoAndText */
+
+.inputFileArea {
+    display: flex;
+    display: -webkit-flex;
+    width: 90%;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin: 0 auto;
+}
+
+.logoAndText h1{
+    text-align: center;
+    margin-top: 100px;
+    font-family: "Montserrat Subrayada";
+}
+
+.input{    
+    border-bottom: 1px solid #333333;  
+}
+
+.inputArea{
+    font-family: "Noto Sans KR";
+    position: relative;
+    margin-top: 40px;
+}
+
+.inputArea input{
+    width: 300px;
+    padding: 14px 8px 8px;
+    border: none;
+    border-bottom: 1px solid #333333;
+    font-size: 20px; color: #333333;
+    outline: none;
+}
+
+.inputArea label{
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    font-size: 20px;
+    color: #333333;
+    transition: all .5s ease;
+}
+
+.inputArea input:focus + label, .inputArea input:valid + label{
+    top: 0;
+    font-size: 10px;
+    color: #333333;
+}
+
+.btnArea{
+    text-align: center;
+    font-family: "Noto Sans KR";
+    margin-top: 20px;
+}
+
+.btnArea button{
+    text-align: center;
+    font-family: "Noto Sans KR";
+    width: 30%;
+    height: 34px;
+    font-size: 18px;
+    color: #333333;
+    border: 1px solid #e2e2e2;
+    background-color: #fcfcfc;
+    box-shadow: 6px 6px 3px rgb(51, 51, 51, .20);
+}
+
+.fileArea{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* #profileImg{
+    width: 300px;
+    height: 300px;
+} */
+
+.fileArea label {
+    display: flex;
+    padding: .5em .75em;
+    color: #fcfcfc  ;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #222222;
+    cursor: pointer;
+    border: 1px solid #222222;
+    border-radius: .25em;
+    -webkit-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+}
+  
+.fileArea label:hover {
+    background-color: #555555;
+}
+  
+.fileArea label:active {
+    background-color: #222222;
+}
+  
+.fileArea input[type="file"]{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.Login{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.Login a{
+    text-decoration: none;
+    color: #333333;
+    font-family: "Noto Sans KR";
+}
+
+.Login a:hover{
+    color: rgb(133, 190, 255);
+}
