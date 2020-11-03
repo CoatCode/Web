@@ -27,7 +27,7 @@ const getFeed = () => {
             console.log('게시물 불러오기 성공');
             console.log(res);
             
-            res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {               
+            res.map(({id, owner, image_urls, title, content, tag}) => {               
                 $('.feedArea').append(`
                 <div class='feed'>
                     <div class='feedHead'>
@@ -52,8 +52,8 @@ const getFeed = () => {
                         <hr>
                     </div>
                     <div class='feedLike_And_Comment'>
-                        <div class='LikeIconImg'>
-                            <img class='likeImg' src="/picture/Icon/heart.png">
+                        <div class='LikeIconImg like-${id}' feedId="${id}">
+
                         </div>
                         <div class="CommentIconImg">
                             <img class="commentImg" src="/picture/Icon/chat-box.png" alt="#">
@@ -91,12 +91,102 @@ const getFeed = () => {
                         </div>
                     </div>
                 </div> 
-                `);               
+                `);
+                
+                getHeartState(id);
             });
         },
         error : function(err){
             console.log(err);
         }
+    });
+}
+
+const getHeartState = (id) => {
+    console.log(id);
+    $.ajax({
+        url : `http://10.80.161.202:8080/feed/post/${id}/like`,
+        type : 'GET',
+        beforeSend : function(xhr){
+            xhr.setRequestHeader("Content-type","application/json");
+            xhr.setRequestHeader("Authorization",`Bearer ${sessionStorage.getItem('userAccessToken')}`);
+        },
+        success : function(res){
+            console.log(res);
+            $(`.like-${id}`).html(`
+                <img src="/picture/Icon/heart (2).png" likeType="true"> 
+            `);
+        },
+        error : function(err){
+            console.log(err);
+            $(`.like-${id}`).html(`
+                <img src="/picture/Icon/heart.png">
+            `);  
+        },
+        async: false,
+        dataType : "json",
+        contentType : "charset=utf-8"
+    })
+}
+
+const heartEvent = () => { //모든 좋아요 이벤트 관리
+    $(document).on('click', '.LikeIconImg', function() {
+        likeId = $(this).attr('feedId');
+        console.log($(`.like-${likeId} > img`).attr('likeType'));
+        
+        if (!$(`.like-${likeId} > img`).attr('likeType')) {
+            heartUp();
+            getHeartState(likeId);
+        } else {
+            console.log('down');
+            heartDown();
+            getHeartState(likeId);
+        }
+        // heartDown();
+        // $('.likeImg').html(`<img src="/picture/Icon/heart.png">`);
+        // $('.likeImg').html(`<img src="/picture/Icon/heart (2).png">`);
+    });
+}
+
+const heartUp = () => {
+    $.ajax({
+        url : `http://10.80.161.202:8080/feed/post/${likeId}/like`,
+        type : 'POST',
+        data : JSON,
+        beforeSend : function(xhr){
+            xhr.setRequestHeader("Content-type","application/json");
+            xhr.setRequestHeader("Authorization",`Bearer ${sessionStorage.getItem('userAccessToken')}`);                      
+        },
+        success : function(res) {
+            console.log(res);
+            console.log(`${likeId}의 좋아요 성공 :)`);
+            getHeartState(likeId);
+        },
+        error: function(err){
+            console.log(err);                    
+        },
+        dataType : "json",
+        contentType : "charset=utf-8"
+    });
+}
+
+const heartDown = () => {
+    $.ajax({
+        url : `http://10.80.161.202:8080/feed/post/${likeId}/like`,
+        type : 'DELETE',
+        beforeSend : function(xhr){
+            xhr.setRequestHeader("Content-type","application/json");
+            xhr.setRequestHeader("Authorization",`Bearer ${sessionStorage.getItem('userAccessToken')}`);
+        },
+        success : function(){
+            console.log(`좋아요 취소 :(`);
+            getHeartState(likeId);
+        },
+        error : function(err){
+            console.log(err);
+        },
+        dataType : 'JSON',
+        contentType : 'charset=utf-8'
     });
 }
 
@@ -141,75 +231,10 @@ const getWriteFeedTime = (timeValue) => {
     }
 }
 
-const keyword_search = (keyword) => {
-    model.search = keyword;
-}
-
-const cho = (str) => {
-    let res = "";
-    const arr = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
-
-    for (let i in str) {
-        code = Math.floor((str[i].charCodeAt() - 44032) / 588)
-        res += code >= 0 ? arr[code] : str[i];
-    }
-
-    return res;
-}
-
-const product_search = () => {
-    $('.products > .product').hide();
-
-    let keyword = model.search;
-    let res = [];
-
-    keyword = keyword.split('|');
-    keyword.forEach((search, t) => {
-        keyword = cho(search);
-        model.productName.forEach((compare, i) => {
-            let compCho = cho(compare); //비교 문자의 초성
-            let strIdxs = []; //비교 문자열에서 검색어와 일치하는 부분의 시작 위치
-            compare = compare.split(''); //비교 문자
-
-            for (let c in compCho) {
-                let idx = compCho.indexOf(keyword, c);
-                if (idx != -1 && strIdxs.indexOf(idx) == -1) {
-                    strIdxs.push(idx);
-                }
-            }
-            chk = 0;
-
-            strIdxs.forEach((idx, d) => {
-                let str = keyword.split('');
-
-                for (let e in search) {
-                    if (search[e].charCodeAt() - 44032 >= 0) {
-                        str[e] = compare[idx + e * 1];
-                    }
-                }
-
-                if (str.join('') == search) {
-                    chk = 1;
-                }
-            })
-
-            if (chk) {
-                res.push(compare.join(''));
-            }
-        })
-
-    })
-
-    res.map((el) => {
-        const temp = $(".products > .product .product_brand:contains('" + el + "')");
-        $(temp).parent().show();
-    })
-}
-
 const functionEXE = () => {
     getFeed();
     movePage();
-    product_search();
+    heartEvent();
 }
 
 $(() => {
