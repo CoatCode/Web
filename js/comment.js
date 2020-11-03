@@ -3,10 +3,9 @@ const log = console.log;
 let ajaxCountNum = 0; //ajax가 몇번 실행되는지 카운트하는 변수
 let ajaxLastNum = ajaxCountNum; //마지막이 몇번인지 확인하는 변수
 let clickCount = 1;
-let postId = getParameterByName('id');
-let commentId = getParameterByName('comment_id');
 
 const writeComment = () => {
+    let postId = getCommentPar('id');
 
     $('.submitBtn').click(function(){
         const comment = {
@@ -60,6 +59,8 @@ const showPostmanInfo = () => {
 }
 
 const showComment = () => {
+    let postId = getCommentPar('id');
+
     $.ajax({
         url : `http://10.80.161.202:8080/feed/post/${postId}/comments`,
         tpye : 'GET',
@@ -72,28 +73,24 @@ const showComment = () => {
             console.log('성공');
             console.log(res);
             //getCommentTime(res);
-            res.map(({data, id}) => {
-                $('.commentArea').append(`
-                <div class="viewCommentArea">
-                    <div class="commenterProfile">
-                        <img src="${data.owner.profile}" alt="">
-                    </div>
-                    <div class="commenter">
-                        <div class="name">
-                            <span>${data.owner.username}</span> 
+            res.map((data) => {
+                $('.viewCommentArea').append(`
+                    <div>
+                        <div class="commenterProfile">
+                            <img src="${data.owner.profile}">
                         </div>
-                        <div class="comment">
-                            <span>${data.content} ${getCommentTime(data.created_at)}</span>
+                        <div class="commenter">
+                            <div class="name">
+                                <span>${data.owner.username}</span> 
+                            </div>
+                            <div class="comment">
+                                <span>${data.content} ${getCommentTime(data.created_at)}</span>
+                            </div>
+                            </div>
+                        <div class="commetMoreView">
+                            <img class="moreView" src="/picture/Icon/more.png" alt="">
                         </div>
                     </div>
-                    <div class="commetMoreView">
-                        <img src="/picture/Icon/more.png" alt="">
-                    </div>
-                </div>
-                <div class="comment">
-                    <input id="commentBox" type="text">
-                    <img class="submitBtn" src="/picture/Icon/submit 1.png" alt=""> 
-                </div>
                 `
                 );
             });
@@ -136,6 +133,9 @@ const showComment = () => {
 // }
 
 const deleteComment = () => {
+    let postId = getCommentPar('id');
+    let commentId = getCommentPar('comment_id');
+
     $('.deleteCommentBtn').click(function(){        
         $.ajax({
             url : `http://10.80.161.202:8080/feed/post/${postId}/comment/${commentId}`,
@@ -192,7 +192,7 @@ const getCommentTime = (timeValue) => {
     }
 }
 
-const getParameterByName = (name) => {
+const getCommentPar = (name) => {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     const regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
             results = regex.exec(location.search);
@@ -202,7 +202,7 @@ const getParameterByName = (name) => {
 const functionEXE = () => {
     writeComment();
     showComment();
-    modifyComment();
+    //modifyComment();
     deleteComment();
 }
 
