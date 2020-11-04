@@ -20,7 +20,9 @@ const getUserData = () => {
             // res.map((data) => { 배열형태가 아니라 object 형태임 !
                 $('.headContainer').append(`
                     <div class="head">
-                        <h2>coco</h2>
+                        <a href="feedPage.html">
+                            <h2>coco</h2>
+                        </a>
                         <div class="search">
                             <input type="text" placeholder="  search">
                         </div>
