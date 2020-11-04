@@ -58,27 +58,6 @@ const getDetail = () => {
                 $('.postManName').html(`
                     <span>${owner.username}</span>
                 `); 
-
-                // comment_preview.map(({owner, content}) => {
-                //     $('.viewCommentArea').append(`
-                //         <div>
-                //             <div class="commenterProfile">
-                //                 <img src="${owner.image}">
-                //             </div>
-                //             <div class="commenter">
-                //                 <div class="name">
-                //                     <span>${owner.username}</span> 
-                //                 </div>
-                //                 <div class="comment">
-                //                     <span>${content}</span>
-                //                 </div>
-                //             </div>
-                //             <div class="commetMoreView">
-                //                 <img class="moreView" src="/picture/Icon/more.png" alt="">
-                //             </div>
-                //         </div>
-                //     `);
-                // });
             
         },
         error : function(err){
