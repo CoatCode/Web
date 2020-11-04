@@ -271,8 +271,13 @@ body{
 }
 
 .commenter{
+    width: 100%;
     margin-top: 6px;
     margin-left: 10px;
+}
+
+.name{
+    width: 100%;
 }
 
 .name span{
@@ -281,6 +286,7 @@ body{
 }
 
 .comment {
+    width: 100%;
     display: flex;
 }
 
