@@ -27,7 +27,7 @@ const getFeed = () => {
             console.log('게시물 불러오기 성공');
             console.log(res);
             
-            res.map(({id, owner, image_urls, title, content, tag}) => {               
+            res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {               
                 $('.feedArea').append(`
                 <div class='feed'>
                     <div class='feedHead'>
@@ -79,14 +79,14 @@ const getFeed = () => {
                     </div>
                     <div class="feedComment">
                         <div class="commenterProfile">
-                            <img src="${owner.image}" alt="">
+                            <img src="${comment_preview}" alt="">
                         </div>
                         <div class="commenter">
                             <div class="name">
-                                <span>${owner.username}</span> 
+                                <span>${comment_preview}</span> 
                             </div>
                             <div class="comment">
-                                <span>${content}</span>
+                                <span>${comment_preview}</span>
                             </div>
                         </div>
                     </div>
@@ -201,7 +201,6 @@ const getWriteFeedTime = (timeValue) => {
     const gap = today.getTime();
     const testYear = today.getFullYear(); // 년도
     const testMonth = today.getMonth() + 1;  // 월
-    const testDate = today.getDate();  // 날짜
 
     const testVal = [ testYear, '.', 
     (testMonth > 9 ? '' : '0') + testMonth, '.',
