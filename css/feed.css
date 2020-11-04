@@ -125,6 +125,11 @@ body{
     display: flex;
 }
 
+.LikeIconImg{
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
 .LikeIconImg img{
     width: 50px;
     cursor: pointer;
