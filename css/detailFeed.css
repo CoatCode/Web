@@ -128,13 +128,14 @@ body{
 }
 
 .title span{
-    font-size: 46px;
+    font-size: 40px;
     font-family: "Noto Sans KR";
 }
 
 .content{
     margin-left: 2%;
-    margin-top: 1%;
+    height: 90px;
+    overflow: auto;
 }
 
 .content span{
@@ -149,7 +150,7 @@ body{
 
 .tag{
     margin-left: 2%;
-    margin-top: 5%;
+    margin-top: 2px;
     margin-bottom: 1%;
 }
 
@@ -298,10 +299,12 @@ body{
 
 .comment span{
     font-family: "Noto Snas KR";
+    width: 230px;
+    margin-bottom: 20px;
 }
 
 .commetMoreView{
-    margin-left: 47%;
+    margin-right: 3%;
     margin-top: 3%;
 }
 
