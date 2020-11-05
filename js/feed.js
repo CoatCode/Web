@@ -10,15 +10,17 @@ const model = {
     productName: []
 }
 
+let getId = 1;
+
 const getFeed = () => {
 
     let ajaxCountNum = 0;
     let ajaxLastNum = ajaxCountNum;
+    
+    getId = getId + 1;
 
     $.ajax({
-        //url : "http://10.80.161.202:8080/user",
-        url : 'http://10.80.161.202:8080/feed/post/all',
-        //url : 'https://coatcode.herokuapp.com/feed/post/all',
+        url : `http://10.80.161.202:8080/feed/post/all?${getId}`,
         type : 'GET',
         beforeSend : function(xhr){
             ajaxCountNum = ajaxCountNum+1;
@@ -100,6 +102,20 @@ const getFeed = () => {
             console.log(err);
         }
     });
+
+    $(window).scroll(function(){
+        let $window = $(this);
+        let scrollTop = $window.scrollTop();
+        let windowHeight = $window.height();
+        let documentHeight = $(document).height();
+        
+        getId++;
+        //console.log("documentHeight:" + documentHeight + " | scrollTop:" + scrollTop + " | windowHeight: " + windowHeight );
+        
+        if( scrollTop + windowHeight + 5 > documentHeight ){
+            getFeed();  
+        }
+    })
 }
 
 const getHeartState = (id) => {
