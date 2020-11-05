@@ -32,6 +32,8 @@ const writeComment = () => {
         });
 
         log(comment);
+
+        window.location.reload();
     });   
 }
 
