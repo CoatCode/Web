@@ -8,11 +8,6 @@ const feedWrite = () => {
     let ajaxCountNum = 0;
     let ajaxLastNum = ajaxCountNum;
 
-    // $(document).on('click', '.submitBtn', function() {
-
-    //     console.log('test');
-    // });
-
     $('.submitBtn').click(function() {
         const formData = new FormData();
 
@@ -22,21 +17,22 @@ const feedWrite = () => {
         const imageData4 = document.getElementById('ImgUpload4').files[0];
         const imageData5 = document.getElementById('ImgUpload5').files[0];
 
-        formData.append('image1', imageData1);
-        formData.append('image2', imageData2);
-        formData.append('image3', imageData3);
-        formData.append('image4', imageData4);
-        formData.append('image5', imageData5);
+        formData.append('image1', imageData1),
+        // formData.append('image2', imageData2);
+        // formData.append('image3', imageData3);
+        // formData.append('image4', imageData4);
+        // formData.append('image5', imageData5);
 
-        formData.append('title', $('#titleBox').val());
-        formData.append('content', $('#commentBox').val());
-        // formData.append('title', "test1");
+        // formData.append('title', $('#titleBox').val());
+        // formData.append('content', $('#commentBox').val());
 
-        // formData.append('content', "test2");
+        formData.append('title', '안녕하세요');
+        formData.append('content', '안녕하세요');
 
         formData.append('tag', $('#writeTag').val());
 
-        console.log('test');
+        console.log($('#commentBox').val());
+        console.log($('#titleBox').val());
 
         $.ajax({
             url : "http://10.80.161.202:8080/feed/post",
@@ -51,6 +47,7 @@ const feedWrite = () => {
                 xhr.setRequestHeader("Authorization",`Bearer ${sessionStorage.getItem('userAccessToken')}`);
             },
             success : function(res){
+                console.log('성공')
                 console.log(res);
             },
             error: function(err){
@@ -58,8 +55,9 @@ const feedWrite = () => {
             },
             // contentType : "application/json; charset=utf-8",
             // dataType : "JSON", //dataType설정
+            async: false,
             dataType: "",
-            contentType : "charset=utf-16" //conttentType설정
+            contentType : "charset=utf-8" //conttentType설정
             //contentType : false
         });
 

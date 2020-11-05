@@ -114,6 +114,7 @@ const getUserId = (name) => {
             results = regex.exec(location.search);
     return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
+
 const userFollow = () => {
     //팔로우클릭시
     $.ajax({
@@ -167,12 +168,11 @@ const followState = () => {
         },
         success : function(res) {
             console.log(res);
-            isFollowed = false;
-            
+            isFollowed = true;
         },
         error : function(res){
             console.log(res);
-            isFollowed = true;
+            isFollowed = false;
         },
         async: false,
         dataType : 'JSON',
