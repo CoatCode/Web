@@ -16,8 +16,6 @@ const getFeed = () => {
 
     let ajaxCountNum = 0;
     let ajaxLastNum = ajaxCountNum;
-    
-    getId = getId + 1;
 
     $.ajax({
         url : `http://10.80.161.202:8080/feed/post/all?${getId}`,
@@ -103,13 +101,15 @@ const getFeed = () => {
         }
     });
 
+    getId++; //2
+ 
     $(window).scroll(function(){
         let $window = $(this);
         let scrollTop = $window.scrollTop();
         let windowHeight = $window.height();
         let documentHeight = $(document).height();
         
-        getId++;
+        //getId++;
         //console.log("documentHeight:" + documentHeight + " | scrollTop:" + scrollTop + " | windowHeight: " + windowHeight );
         
         if( scrollTop + windowHeight + 5 > documentHeight ){
@@ -127,7 +127,7 @@ const getHeartState = (id) => {
             xhr.setRequestHeader("Content-type","application/json");
             xhr.setRequestHeader("Authorization",`Bearer ${sessionStorage.getItem('userAccessToken')}`);
         },
-        success : function(res){
+        success : function(res) {
             console.log(res);
             $(`.like-${id}`).html(`
                 <img src="/picture/Icon/heart (2).png" likeType="true"> 
