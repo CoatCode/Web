@@ -9,15 +9,22 @@ const feedWrite = () => {
     let ajaxLastNum = ajaxCountNum;
 
     $('.submitBtn').click(function() {
+        // const formData = new FormData();
+
         const formData = new FormData();
+        const imageData = document.getElementById('ImgUpload1').files[0];
 
-        const imageData1 = document.getElementById('ImgUpload1').files[0];
-        const imageData2 = document.getElementById('ImgUpload2').files[0];
-        const imageData3 = document.getElementById('ImgUpload3').files[0];
-        const imageData4 = document.getElementById('ImgUpload4').files[0];
-        const imageData5 = document.getElementById('ImgUpload5').files[0];
+        formData.append('image1', imageData);
+        formData.append('title', 'test1');
+        formData.append('content', 'test1');
 
-        formData.append('image1', imageData1),
+        // const imageData1 = document.getElementById('ImgUpload1').files[0];
+        // const imageData2 = document.getElementById('ImgUpload2').files[0];
+        // const imageData3 = document.getElementById('ImgUpload3').files[0];
+        // const imageData4 = document.getElementById('ImgUpload4').files[0];
+        // const imageData5 = document.getElementById('ImgUpload5').files[0];
+
+        // formData.append('image1', imageData1),
         // formData.append('image2', imageData2);
         // formData.append('image3', imageData3);
         // formData.append('image4', imageData4);
@@ -26,19 +33,19 @@ const feedWrite = () => {
         // formData.append('title', $('#titleBox').val());
         // formData.append('content', $('#commentBox').val());
 
-        formData.append('title', '안녕하세요');
-        formData.append('content', '안녕하세요');
+        // formData.append('title', '안녕하세요');
+        // formData.append('content', '안녕하세요');
 
-        formData.append('tag', $('#writeTag').val());
+        // formData.append('tag', $('#writeTag').val());
 
-        console.log($('#commentBox').val());
-        console.log($('#titleBox').val());
+        // console.log($('#commentBox').val());
+        // console.log($('#titleBox').val());   
 
         $.ajax({
             url : "http://10.80.161.202:8080/feed/post",
             type : 'POST',
             // data : JSON.stringify(formData),
-            data : formData,
+            data : JSON.stringify(formData), 
             processData : false,
             cache : false,
             beforeSend : function(xhr){
