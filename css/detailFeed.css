@@ -168,13 +168,13 @@ body{
     display: flex;
 }
 
-.likeIcon{
+.LikeIconImg{
     width: 64px;
     height: 64px;
     margin-left: 1%;
 }
 
-.likeIcon img{
+.LikeIconImg img{
     width: 64px;
     height: 64px;
 }
