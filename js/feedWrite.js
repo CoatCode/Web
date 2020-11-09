@@ -1,28 +1,21 @@
 
-const formData = () => {
-    
-}
-
 const feedWrite = () => {
     //console.log('안녕하세요')
     let ajaxCountNum = 0;
     let ajaxLastNum = ajaxCountNum;
 
     $('.submitBtn').click(function() {
-        // const formData = new FormData();
-
         const formData = new FormData();
-        const imageData = document.getElementById('ImgUpload1').files[0];
 
-        formData.append('image1', imageData);
+        const imageData1 = document.getElementById('ImgUpload1').files[0];
+        const imageData2 = document.getElementById('ImgUpload2').files[0];
+        const imageData3 = document.getElementById('ImgUpload3').files[0];
+        const imageData4 = document.getElementById('ImgUpload4').files[0];
+        const imageData5 = document.getElementById('ImgUpload5').files[0];
+
+        formData.append('image1', imageData1);
         formData.append('title', 'test1');
         formData.append('content', 'test1');
-
-        // const imageData1 = document.getElementById('ImgUpload1').files[0];
-        // const imageData2 = document.getElementById('ImgUpload2').files[0];
-        // const imageData3 = document.getElementById('ImgUpload3').files[0];
-        // const imageData4 = document.getElementById('ImgUpload4').files[0];
-        // const imageData5 = document.getElementById('ImgUpload5').files[0];
 
         // formData.append('image1', imageData1),
         // formData.append('image2', imageData2);
@@ -45,7 +38,7 @@ const feedWrite = () => {
             url : "http://10.80.161.202:8080/feed/post",
             type : 'POST',
             // data : JSON.stringify(formData),
-            data : JSON.stringify(formData), 
+            data : formData, 
             processData : false,
             cache : false,
             beforeSend : function(xhr){
