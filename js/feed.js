@@ -67,7 +67,7 @@ const getFeed = (id) => {
                          </h4>
                      </div>
                      <div class="feedComment">
-                        ${Object.keys(comment_preview[0].owner)   
+                        ${O\\bject.keys(comment_preview[0].owner)   
                             .map(key => (key+":"+comment_preview[0].owner[key]))
                         }    
                     </div> 
