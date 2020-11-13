@@ -12,171 +12,236 @@ const model = {
 
 let getId = 1;
 
-const getFeed = (id) => {
-    $.ajax({
-        url: `http://10.80.161.202:8080/feed/post/all?${id}`,
-        type: 'GET',
-        success: function(res) {            res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {  
-                $('.feedArea').append(`
-                 <div class='feed'>
-                     <div class='feedHead'>
-                         <div class='postmanProfile'>
-                                 <img src= "${owner.image}">                     
-                         </div>
-                         <div class='postmanName'>
-                             <div class= 'postmanNameText'>${owner.username}</div>
-                         </div                     
-                    </div>
-                     <div class='disuniteLine'>
-                         <hr>
-                     </div>
-                     <div class="feedThumbanil">
-                         <div class="thumbanilImg">
-                             <a href="detailFeed.html?id=${id}">
-                                 <img class="ImgArea" src="${image_urls}" alt="">
-                             </a>
-                         </div>
-                     </div>
-                     <div class="disuniteLine">
-                         <hr>
-                     </div>
-                     <div class='feedLike_And_Comment'>
-                         <div class='LikeIconImg like-${id}' feedId="${id}">
-
-                         </div>
-                         <div class="CommentIconImg">
-                             <img class="commentImg" src="/picture/Icon/chat-box.png" alt="#">
-                         </div>
-                         <div class="viewMoreArea">
-                             <img class="view_more" src="/picture/Icon/more.png">
-                         </div>
-                     </div>
-                     <div class='title'>
-                         <h2>
-                             ${title}
-                         </h2>
-                     </div>
-                     <div class='content'>
-                         <span>
-                             ${content}
-                         </span>
-                     </div>
-                     <div class='tag'>
-                         <h4>
-                             ${tag}
-                         </h4>
-                     </div>
-                     <div class="feedComment">
-                        ${O\\bject.keys(comment_preview[0].owner)   
-                            .map(key => (key+":"+comment_preview[0].owner[key]))
-                        }    
-                    </div> 
-                `);
-            })   
-        },
-        error : function(err){
-            console.log(err);
-        },
-        async: false    
-    })
-}
-
-// const getFeed = () => {
-
-//     let ajaxCountNum = 0;
-//     let ajaxLastNum = ajaxCountNum;
-
+// const getFeed = (id) => {
 //     $.ajax({
-//         url : `http://10.80.161.202:8080/feed/post/all?${getId}`,
-//         type : 'GET',
-//         beforeSend : function(xhr){
-//             ajaxCountNum = ajaxCountNum+1;
-//         },
-//         success : function(res){
-//             console.log('게시물 불러오기 성공');
-//             console.log(res);
-        
-//             res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {  
-//                 console.log(comment_preview);      
+//         url: `http://10.80.161.202:8080/feed/post/all?${id}`,
+//         type: 'GET',
+//         success: function(res) {            res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {  
 //                 $('.feedArea').append(`
-//                 <div class='feed'>
-//                     <div class='feedHead'>
-//                         <div class='postmanProfile'>
-//                                 <img src= "${owner.image}">                     
-//                         </div>
-//                         <div class='postmanName'>
-//                             <div class= 'postmanNameText'>${owner.username}</div>
-//                         </div>
+//                  <div class='feed'>
+//                      <div class='feedHead'>
+//                          <div class='postmanProfile'>
+//                                  <img src= "${owner.image}">                     
+//                          </div>
+//                          <div class='postmanName'>
+//                              <div class= 'postmanNameText'>${owner.username}</div>
+//                          </div                     
 //                     </div>
-//                     <div class='disuniteLine'>
-//                         <hr>
-//                     </div>
-//                     <div class="feedThumbanil">
-//                         <div class="thumbanilImg">
-//                             <a href="detailFeed.html?id=${id}">
-//                                 <img class="ImgArea" src="${image_urls}" alt="">
-//                             </a>
-//                         </div>
-//                     </div>
-//                     <div class="disuniteLine">
-//                         <hr>
-//                     </div>
-//                     <div class='feedLike_And_Comment'>
-//                         <div class='LikeIconImg like-${id}' feedId="${id}">
+//                      <div class='disuniteLine'>
+//                          <hr>
+//                      </div>
+//                      <div class="feedThumbanil">
+//                          <div class="thumbanilImg">
+//                              <a href="detailFeed.html?id=${id}">
+//                                  <img class="ImgArea" src="${image_urls}" alt="">
+//                              </a>
+//                          </div>
+//                      </div>
+//                      <div class="disuniteLine">
+//                          <hr>
+//                      </div>
+//                      <div class='feedLike_And_Comment'>
+//                          <div class='LikeIconImg like-${id}' feedId="${id}">
 
-//                         </div>
-//                         <div class="CommentIconImg">
-//                             <img class="commentImg" src="/picture/Icon/chat-box.png" alt="#">
-//                         </div>
-//                         <div class="viewMoreArea">
-//                             <img class="view_more" src="/picture/Icon/more.png">
-//                         </div>
-//                     </div>
-//                     <div class='title'>
-//                         <h2>
-//                             ${title}
-//                         </h2>
-//                     </div>
-//                     <div class='content'>
-//                         <span>
-//                             ${content}
-//                         </span>
-//                     </div>
-//                     <div class='tag'>
-//                         <h4>
-//                             ${tag}
-//                         </h4>
-//                     </div>
-//                     <div class="feedComment">
-//                         ${commentLayout(comment_preview)}
-//                     </div>
-//                 </div> 
+//                          </div>
+//                          <div class="CommentIconImg">
+//                              <img class="commentImg" src="/picture/Icon/chat-box.png" alt="#">
+//                          </div>
+//                          <div class="viewMoreArea">
+//                              <img class="view_more" src="/picture/Icon/more.png">
+//                          </div>
+//                      </div>
+//                      <div class='title'>
+//                          <h2>
+//                              ${title}
+//                          </h2>
+//                      </div>
+//                      <div class='content'>
+//                          <span>
+//                              ${content}
+//                          </span>
+//                      </div>
+//                      <div class='tag'>
+//                          <h4>
+//                              ${tag}
+//                          </h4>
+//                      </div>
+//                      <div class="feedComment">
+                           
+//                     </div> 
 //                 `);
-                
-//                 getHeartState(id);
-//             });
+//             })   
 //         },
 //         error : function(err){
 //             console.log(err);
-//         }
-//     });
-
-//     getId++; //2
- 
-//     // $(window).scroll(function(){
-//     //     let $window = $(this);
-//     //     let scrollTop = $window.scrollTop();
-//     //     let windowHeight = $window.height();
-//     //     let documentHeight = $(document).height();
-        
-//     //     //getId++;
-//     //     //console.log("documentHeight:" + documentHeight + " | scrollTop:" + scrollTop + " | windowHeight: " + windowHeight );
-        
-//     //     if( scrollTop + windowHeight + 5 > documentHeight ){
-//     //         getFeed();  
-//     //     }
-//     // })
+//         },
+//         async: false    
+//     })
 // }
+
+const getFeed = () => {
+
+    let ajaxCountNum = 0;
+    let ajaxLastNum = ajaxCountNum;
+
+    $.ajax({
+        url : `http://10.80.161.202:8080/feed/post/all`,
+        type : 'GET',
+        beforeSend : function(xhr){
+            ajaxCountNum = ajaxCountNum+1;
+        },
+        success : function(res){
+            console.log('게시물 불러오기 성공');
+            console.log(res);
+        
+            res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {  
+                console.log(comment_preview);      
+                $('.feedArea').append(`
+                <div class='feed'>
+                    <div class='feedHead'>
+                        <div class='postmanProfile'>
+                                <img src= "${owner.image}">                     
+                        </div>
+                        <div class='postmanName'>
+                            <div class= 'postmanNameText'>${owner.username}</div>
+                        </div>
+                    </div>
+                    <div class='disuniteLine'>
+                        <hr>
+                    </div>
+                    <div class="feedThumbanil">
+                        <div class="thumbanilImg">
+                            <a href="detailFeed.html?id=${id}">
+                                <img class="ImgArea" src="${image_urls}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="disuniteLine">
+                        <hr>
+                    </div>
+                    <div class='feedLike_And_Comment'>
+                        <div class='LikeIconImg like-${id}' feedId="${id}">
+
+                        </div>
+                        <div class="CommentIconImg">
+                            <img class="commentImg" src="/picture/Icon/chat-box.png" alt="#">
+                        </div>
+                        <div class="viewMoreArea">
+                            <img class="view_more" src="/picture/Icon/more.png">
+                        </div>
+                    </div>
+                    <div class='title'>
+                        <h2>
+                            ${title}
+                        </h2>
+                    </div>
+                    <div class='content'>
+                        <span>
+                            ${content}
+                        </span>
+                    </div>
+                    <div class='tag'>
+                        <h4>
+                            ${tag}
+                        </h4>
+                    </div>
+                    <div class="feedComment">
+                        
+                    </div>
+                </div> 
+                `);
+                
+                getHeartState(id);
+            });
+        },
+        error : function(err){
+            console.log(err);
+        }
+    });
+
+    let getId = 2;
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+          console.log(++getId);
+          
+          $.ajax({
+            url : `http://10.80.161.202:8080/feed/post/all?${getId}`,
+            type : 'GET',
+            beforeSend : function(xhr){
+                ajaxCountNum = ajaxCountNum+1;
+            },
+            success : function(res){
+                console.log('게시물 불러오기 성공');
+                console.log(res);
+            
+                res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {  
+                    console.log(comment_preview);      
+                    $('.feedArea').append(`
+                    <div class='feed'>
+                        <div class='feedHead'>
+                            <div class='postmanProfile'>
+                                    <img src= "${owner.image}">                     
+                            </div>
+                            <div class='postmanName'>
+                                <div class= 'postmanNameText'>${owner.username}</div>
+                            </div>
+                        </div>
+                        <div class='disuniteLine'>
+                            <hr>
+                        </div>
+                        <div class="feedThumbanil">
+                            <div class="thumbanilImg">
+                                <a href="detailFeed.html?id=${id}">
+                                    <img class="ImgArea" src="${image_urls}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="disuniteLine">
+                            <hr>
+                        </div>
+                        <div class='feedLike_And_Comment'>
+                            <div class='LikeIconImg like-${id}' feedId="${id}">
+    
+                            </div>
+                            <div class="CommentIconImg">
+                                <img class="commentImg" src="/picture/Icon/chat-box.png" alt="#">
+                            </div>
+                            <div class="viewMoreArea">
+                                <img class="view_more" src="/picture/Icon/more.png">
+                            </div>
+                        </div>
+                        <div class='title'>
+                            <h2>
+                                ${title}
+                            </h2>
+                        </div>
+                        <div class='content'>
+                            <span>
+                                ${content}
+                            </span>
+                        </div>
+                        <div class='tag'>
+                            <h4>
+                                ${tag}
+                            </h4>
+                        </div>
+                        <div class="feedComment">
+                            
+                        </div>
+                    </div> 
+                    `);
+                    
+                    getHeartState(id);
+                });
+            },
+            error : function(err){
+                console.log(err);
+            }
+        });  
+        }
+    });
+}
 
 const commentLayout = (data, length) => {
     // console.log(length);
