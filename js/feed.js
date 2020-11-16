@@ -1,79 +1,7 @@
-// //const log = console.log();
-// //owner.img(글쓴사람 프로필) 안나옴, commentPreview(댓글 미리보기) 이상함
-// //글쓰기에서 파라미터가 없다고뜨거나 / 오류가 안뜸;; (글쓰기가 안됨)
-// //map 으로 해더쪽 띄우기 안됨 (사용자 프로필 띄우기)
-// //res(json값)에서 id만 때오기 (서버에 보낼 url 에 넣을 postid 를 받아오기 위함)
-// //이미지 업로드후 미리보기 띄우기 // 글쓰기 & 회원가입
-
-
-// const getFeed = (id) => {
-//     $.ajax({
-//         url: `http://10.80.161.202:8080/feed/post/all?${id}`,
-//         type: 'GET',
-//         success: function(res) {            res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {  
-//                 $('.feedArea').append(`
-//                  <div class='feed'>
-//                      <div class='feedHead'>
-//                          <div class='postmanProfile'>
-//                                  <img src= "${owner.image}">                     
-//                          </div>
-//                          <div class='postmanName'>
-//                              <div class= 'postmanNameText'>${owner.username}</div>
-//                          </div                     
-//                     </div>
-//                      <div class='disuniteLine'>
-//                          <hr>
-//                      </div>
-//                      <div class="feedThumbanil">
-//                          <div class="thumbanilImg">
-//                              <a href="detailFeed.html?id=${id}">
-//                                  <img class="ImgArea" src="${image_urls}" alt="">
-//                              </a>
-//                          </div>
-//                      </div>
-//                      <div class="disuniteLine">
-//                          <hr>
-//                      </div>
-//                      <div class='feedLike_And_Comment'>
-//                          <div class='LikeIconImg like-${id}' feedId="${id}">
-
-//                          </div>
-//                          <div class="CommentIconImg">
-//                              <img class="commentImg" src="/picture/Icon/chat-box.png" alt="#">
-//                          </div>
-//                          <div class="viewMoreArea">
-//                              <img class="view_more" src="/picture/Icon/more.png">
-//                          </div>
-//                      </div>
-//                      <div class='title'>
-//                          <h2>
-//                              ${title}
-//                          </h2>
-//                      </div>
-//                      <div class='content'>
-//                          <span>
-//                              ${content}
-//                          </span>
-//                      </div>
-//                      <div class='tag'>
-//                          <h4>
-//                              ${tag}
-//                          </h4>
-//                      </div>
-//                      <div class="feedComment">
-                           
-//                     </div> 
-//                 `);
-//             })   
-//         },
-//         error : function(err){
-//             console.log(err);
-//         },
-//         async: false    
-//     })
-// }
 let isLoading = true;
 let getId = 1;
+
+//feed 관련코드
 
 const getFeed = (id) => {
     //loading();
@@ -141,9 +69,14 @@ const getFeed = (id) => {
                                 ${content}
                             </span>
                         </div>
-                        <div class='tag'>
+                        <div class='tagWrapper'>
                             <h4>
-                                ${tag}
+                                ${tag ? `
+                                    <div class="tag">
+                                        ${tag}
+                                    </div>
+                                    `
+                                : `<div></div>`}
                             </h4>
                         </div>
                         <div class='feedCommentWrapper'>
@@ -199,58 +132,81 @@ const getFeed = (id) => {
                 res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {  
                     console.log(comment_preview);      
                         $('.feedArea').append(`
-                    <div class='feed'>
-                        <div class='feedHead'>
-                            <div class='postmanProfile'>
-                                <img src= "${owner.image}">                     
+                        <div class='feed'>
+                            <div class='feedHead'>
+                                <div class='postmanProfile'>
+                                        <img src= "${owner.image}">                     
+                                </div>
+                                <div class='postmanName'>
+                                    <div class= 'postmanNameText'>${owner.username}</div>
+                                </div>
                             </div>
-                            <div class='postmanName'>
-                                <div class= 'postmanNameText'>${owner.username}</div>
+                            <div class='disuniteLine'>
+                                <hr>
                             </div>
-                        </div>
-                        <div class='disuniteLine'>
-                            <hr>
-                        </div>
-                        <div class="feedThumbanil">
-                            <div class="thumbanilImg">
-                                <a href="detailFeed.html?id=${id}">
-                                    <img class="ImgArea" src="${image_urls}" alt="">
-                                </a>
+                            <div class="feedThumbanil">
+                                <div class="thumbanilImg">
+                                    <a href="detailFeed.html?id=${id}">
+                                        <img class="ImgArea" src="${image_urls}" alt="">
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="disuniteLine">
-                            <hr>
-                        </div>
-                        <div class='feedLike_And_Comment'>
-                            <div class='LikeIconImg like-${id}' feedId="${id}">
-    
+                            <div class="disuniteLine">
+                                <hr>
                             </div>
-                            <div class="CommentIconImg">
-                                <img class="commentImg" src="/picture/Icon/chat-box.png" alt="#">
+                            <div class='feedLike_And_Comment'>
+                                <div class='LikeIconImg like-${id}' feedId="${id}">
+                                    <img class="likeImg" src="/picture/Icon/heart.png" alt="#">
+                                </div>
+                                <div class="CommentIconImg">
+                                    <img class="commentImg" src="/picture/Icon/chat-box.png" alt="#">
+                                </div>
+                                <div class="viewMoreArea">
+                                    <img class="view_more" src="/picture/Icon/more.png">
+                                </div>
                             </div>
-                            <div class="viewMoreArea">
-                                <img class="view_more" src="/picture/Icon/more.png">
+                            <div class='title'>
+                                <h2>
+                                    ${title}
+                                </h2>
                             </div>
-                        </div>
-                        <div class='title'>
-                            <h2>
-                                ${title}
-                            </h2>
-                        </div>
-                        <div class='content'>
-                            <span>
-                                ${content}
-                            </span>
-                        </div>
-                        <div class='tag'>
-                            <h4>
-                                ${tag}
-                            </h4>
-                        </div>
-                        <div class="feedComment">
-                            
-                        </div>
-                    </div> 
+                            <div class='content'>
+                                <span>
+                                    ${content}
+                                </span>
+                            </div>
+                            <div class='tagWrapper'>
+                                <h4>
+                                    ${tag ? `
+                                        <div class="tag">
+                                            ${tag}
+                                        </div>
+                                        `
+                                    : `<div></div>`}
+                                </h4>
+                            </div>
+                            <div class='feedCommentWrapper'>
+                            ${comment_preview ? 
+                                comment_preview.map((data) => {
+                                    return `
+                                    <div class="feedComment">
+                                        <div class="commenterProfile">
+                                            <img src="${data.owner.profile}"/>
+                                        </div>
+                                        <div class="commenter">
+                                            <div class="name">
+                                                <div>${data.owner.username}</div>
+                                            </div>
+                                            <div class="comment">
+                                            <span>${data.content}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    `
+                                })
+                                : `<div></div>`}
+                            </div>
+                        </div> 
                     `);
                     
                     getHeartState(id);
@@ -263,6 +219,444 @@ const getFeed = (id) => {
         }
     });
 }
+
+const getFollowFeed = (id) => {
+    let ajaxCountNum = 0;
+    let ajaxLastNum = ajaxCountNum;
+    isLoading = true;
+
+    $('.followMenu').click(function(){
+        $.ajax({
+            url : `http://10.80.161.202:8080/feed/post/follow`,
+            type : 'GET',
+            beforeSend : function(xhr){
+                ajaxCountNum = ajaxCountNum+1;
+            },
+            success : function(res){
+                console.log(isLoading)
+                
+                isLoading = false;
+                //loading();
+    
+                //console.log('게시물 불러오기 성공');
+                console.log(res);
+                
+                res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {
+                    $('.feedArea').append(`
+                        <div class='feed'>
+                            <div class='feedHead'>
+                                <div class='postmanProfile'>
+                                        <img src= "${owner.image}">                     
+                                </div>
+                                <div class='postmanName'>
+                                    <div class= 'postmanNameText'>${owner.username}</div>
+                                </div>
+                            </div>
+                            <div class='disuniteLine'>
+                                <hr>
+                            </div>
+                            <div class="feedThumbanil">
+                                <div class="thumbanilImg">
+                                    <a href="detailFeed.html?id=${id}">
+                                        <img class="ImgArea" src="${image_urls}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="disuniteLine">
+                                <hr>
+                            </div>
+                            <div class='feedLike_And_Comment'>
+                                <div class='LikeIconImg like-${id}' feedId="${id}">
+                                    <img class="likeImg" src="/picture/Icon/heart.png" alt="#">
+                                </div>
+                                <div class="CommentIconImg">
+                                    <img class="commentImg" src="/picture/Icon/chat-box.png" alt="#">
+                                </div>
+                                <div class="viewMoreArea">
+                                    <img class="view_more" src="/picture/Icon/more.png">
+                                </div>
+                            </div>
+                            <div class='title'>
+                                <h2>
+                                    ${title}
+                                </h2>
+                            </div>
+                            <div class='content'>
+                                <span>
+                                    ${content}
+                                </span>
+                            </div>
+                            <div class='tagWrapper'>
+                                <h4>
+                                    ${tag ? `
+                                        <div class="tag">
+                                            ${tag}
+                                        </div>
+                                        `
+                                    : `<div></div>`}
+                                </h4>
+                            </div>
+                            <div class='feedCommentWrapper'>
+                            ${comment_preview ? 
+                                comment_preview.map((data) => {
+                                    return `
+                                    <div class="feedComment">
+                                        <div class="commenterProfile">
+                                            <img src="${data.owner.profile}"/>
+                                        </div>
+                                        <div class="commenter">
+                                            <div class="name">
+                                                <div>${data.owner.username}</div>
+                                            </div>
+                                            <div class="comment">
+                                            <span>${data.content}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    `
+                                })
+                                : `<div></div>`}
+                            </div>
+                        </div> 
+                    `);
+                        
+                    getHeartState(id);
+                });
+            },
+            error : function(err){
+                isLoading = false;
+                console.log(err);
+            }
+        });
+    
+        let getId = 1;
+    
+        $(window).scroll(function() {
+            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+              console.log(getId);
+              getId++;
+    
+              $.ajax({
+                url : `http://10.80.161.202:8080/feed/post/follow?page=${getId}`,
+                type : 'GET',
+                beforeSend : function(xhr){
+                    ajaxCountNum = ajaxCountNum+1;
+                },
+                success : function(res){
+                    console.log('게시물 불러오기 성공');
+                    //console.log(res);
+                    console.log(getId);
+                    res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {  
+                        console.log(comment_preview);      
+                            $('.feedArea').append(`
+                            <div class='feed'>
+                                <div class='feedHead'>
+                                    <div class='postmanProfile'>
+                                            <img src= "${owner.image}">                     
+                                    </div>
+                                    <div class='postmanName'>
+                                        <div class= 'postmanNameText'>${owner.username}</div>
+                                    </div>
+                                </div>
+                                <div class='disuniteLine'>
+                                    <hr>
+                                </div>
+                                <div class="feedThumbanil">
+                                    <div class="thumbanilImg">
+                                        <a href="detailFeed.html?id=${id}">
+                                            <img class="ImgArea" src="${image_urls}" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="disuniteLine">
+                                    <hr>
+                                </div>
+                                <div class='feedLike_And_Comment'>
+                                    <div class='LikeIconImg like-${id}' feedId="${id}">
+                                        <img class="likeImg" src="/picture/Icon/heart.png" alt="#">
+                                    </div>
+                                    <div class="CommentIconImg">
+                                        <img class="commentImg" src="/picture/Icon/chat-box.png" alt="#">
+                                    </div>
+                                    <div class="viewMoreArea">
+                                        <img class="view_more" src="/picture/Icon/more.png">
+                                    </div>
+                                </div>
+                                <div class='title'>
+                                    <h2>
+                                        ${title}
+                                    </h2>
+                                </div>
+                                <div class='content'>
+                                    <span>
+                                        ${content}
+                                    </span>
+                                </div>
+                                <div class='tagWrapper'>
+                                    <h4>
+                                        ${tag ? `
+                                            <div class="tag">
+                                                ${tag}
+                                            </div>
+                                            `
+                                        : `<div></div>`}
+                                    </h4>
+                                </div>
+                                <div class='feedCommentWrapper'>
+                                ${comment_preview ? 
+                                    comment_preview.map((data) => {
+                                        return `
+                                        <div class="feedComment">
+                                            <div class="commenterProfile">
+                                                <img src="${data.owner.profile}"/>
+                                            </div>
+                                            <div class="commenter">
+                                                <div class="name">
+                                                    <div>${data.owner.username}</div>
+                                                </div>
+                                                <div class="comment">
+                                                <span>${data.content}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        `
+                                    })
+                                    : `<div></div>`}
+                                </div>
+                            </div> 
+                        `);
+                        
+                        getHeartState(id);
+                    });
+                },
+                error : function(err){
+                    console.log(err);
+                }
+            });  
+            }
+        });
+    });
+}
+
+const getPopularFeed = (id) => {
+    let ajaxCountNum = 0;
+    let ajaxLastNum = ajaxCountNum;
+    isLoading = true;
+
+    $('.followMenu').click(function(){
+        $.ajax({
+            url : `http://10.80.161.202:8080/feed/post/pop`,
+            type : 'GET',
+            beforeSend : function(xhr){
+                ajaxCountNum = ajaxCountNum+1;
+            },
+            success : function(res){
+                console.log(isLoading)
+                
+                isLoading = false;
+                //loading();
+    
+                //console.log('게시물 불러오기 성공');
+                console.log(res);
+                
+                res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {
+                    $('.feedArea').append(`
+                        <div class='feed'>
+                            <div class='feedHead'>
+                                <div class='postmanProfile'>
+                                        <img src= "${owner.image}">                     
+                                </div>
+                                <div class='postmanName'>
+                                    <div class= 'postmanNameText'>${owner.username}</div>
+                                </div>
+                            </div>
+                            <div class='disuniteLine'>
+                                <hr>
+                            </div>
+                            <div class="feedThumbanil">
+                                <div class="thumbanilImg">
+                                    <a href="detailFeed.html?id=${id}">
+                                        <img class="ImgArea" src="${image_urls}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="disuniteLine">
+                                <hr>
+                            </div>
+                            <div class='feedLike_And_Comment'>
+                                <div class='LikeIconImg like-${id}' feedId="${id}">
+                                    <img class="likeImg" src="/picture/Icon/heart.png" alt="#">
+                                </div>
+                                <div class="CommentIconImg">
+                                    <img class="commentImg" src="/picture/Icon/chat-box.png" alt="#">
+                                </div>
+                                <div class="viewMoreArea">
+                                    <img class="view_more" src="/picture/Icon/more.png">
+                                </div>
+                            </div>
+                            <div class='title'>
+                                <h2>
+                                    ${title}
+                                </h2>
+                            </div>
+                            <div class='content'>
+                                <span>
+                                    ${content}
+                                </span>
+                            </div>
+                            <div class='tagWrapper'>
+                                <h4>
+                                    ${tag ? `
+                                        <div class="tag">
+                                            ${tag}
+                                        </div>
+                                        `
+                                    : `<div></div>`}
+                                </h4>
+                            </div>
+                            <div class='feedCommentWrapper'>
+                            ${comment_preview ? 
+                                comment_preview.map((data) => {
+                                    return `
+                                    <div class="feedComment">
+                                        <div class="commenterProfile">
+                                            <img src="${data.owner.profile}"/>
+                                        </div>
+                                        <div class="commenter">
+                                            <div class="name">
+                                                <div>${data.owner.username}</div>
+                                            </div>
+                                            <div class="comment">
+                                            <span>${data.content}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    `
+                                })
+                                : `<div></div>`}
+                            </div>
+                        </div> 
+                    `);
+                        
+                    getHeartState(id);
+                });
+            },
+            error : function(err){
+                isLoading = false;
+                console.log(err);
+            }
+        });
+    
+        let getId = 1;
+    
+        $(window).scroll(function() {
+            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+              console.log(getId);
+              getId++;
+    
+              $.ajax({
+                url : `http://10.80.161.202:8080/feed/post/pop?page=${getId}`,
+                type : 'GET',
+                beforeSend : function(xhr){
+                    ajaxCountNum = ajaxCountNum+1;
+                },
+                success : function(res){
+                    console.log('게시물 불러오기 성공');
+                    //console.log(res);
+                    console.log(getId);
+                    res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {  
+                        console.log(comment_preview);      
+                            $('.feedArea').append(`
+                            <div class='feed'>
+                                <div class='feedHead'>
+                                    <div class='postmanProfile'>
+                                            <img src= "${owner.image}">                     
+                                    </div>
+                                    <div class='postmanName'>
+                                        <div class= 'postmanNameText'>${owner.username}</div>
+                                    </div>
+                                </div>
+                                <div class='disuniteLine'>
+                                    <hr>
+                                </div>
+                                <div class="feedThumbanil">
+                                    <div class="thumbanilImg">
+                                        <a href="detailFeed.html?id=${id}">
+                                            <img class="ImgArea" src="${image_urls}" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="disuniteLine">
+                                    <hr>
+                                </div>
+                                <div class='feedLike_And_Comment'>
+                                    <div class='LikeIconImg like-${id}' feedId="${id}">
+                                        <img class="likeImg" src="/picture/Icon/heart.png" alt="#">
+                                    </div>
+                                    <div class="CommentIconImg">
+                                        <img class="commentImg" src="/picture/Icon/chat-box.png" alt="#">
+                                    </div>
+                                    <div class="viewMoreArea">
+                                        <img class="view_more" src="/picture/Icon/more.png">
+                                    </div>
+                                </div>
+                                <div class='title'>
+                                    <h2>
+                                        ${title}
+                                    </h2>
+                                </div>
+                                <div class='content'>
+                                    <span>
+                                        ${content}
+                                    </span>
+                                </div>
+                                <div class='tagWrapper'>
+                                    <h4>
+                                        ${tag ? `
+                                            <div class="tag">
+                                                ${tag}
+                                            </div>
+                                            `
+                                        : `<div></div>`}
+                                    </h4>
+                                </div>
+                                <div class='feedCommentWrapper'>
+                                ${comment_preview ? 
+                                    comment_preview.map((data) => {
+                                        return `
+                                        <div class="feedComment">
+                                            <div class="commenterProfile">
+                                                <img src="${data.owner.profile}"/>
+                                            </div>
+                                            <div class="commenter">
+                                                <div class="name">
+                                                    <div>${data.owner.username}</div>
+                                                </div>
+                                                <div class="comment">
+                                                <span>${data.content}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        `
+                                    })
+                                    : `<div></div>`}
+                                </div>
+                            </div> 
+                        `);
+                        
+                        getHeartState(id);
+                    });
+                },
+                error : function(err){
+                    console.log(err);
+                }
+            });  
+            }
+        });
+    });
+}
+
+//좋아요 관련 코드 
 
 const getHeartState = (id) => {
     //console.log(id);
@@ -352,11 +746,15 @@ const heartDown = () => {
     });
 }
 
+//
+
 const movePage = () => {
     $('.writeImg').click(function(){
         window.location.assign('writeFeed.html');
     });
 }
+
+//글쓴시간
 
 const getWriteFeedTime = (timeValue) => {
     const today = new Date();
@@ -392,6 +790,7 @@ const getWriteFeedTime = (timeValue) => {
     }
 }
 
+//함수 실행 코드
 const functionEXE = () => {
     getFeed();
     movePage();
@@ -402,4 +801,3 @@ const functionEXE = () => {
 $(() => {
     functionEXE();
 })
-
