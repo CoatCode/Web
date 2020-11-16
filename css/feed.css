@@ -261,6 +261,7 @@ body{
 
 .feedComment{
     display: flex;
+    display: -webkit-flex;
 }
 
 .commenter{
