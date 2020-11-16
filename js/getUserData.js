@@ -36,10 +36,10 @@ const getUserData = () => {
                     <nav>
                         <div class="nav">
                             <ul class="navContainer">
-                                <li><a class="navMenu" href="#">전체</a></li>
-                                <li><a class="navMenu" href="#">인기</a></li>
-                                <li><a class="navMenu" href="#">피드</a></li>
-                                <li><a class="navMenu" href="#">스토어</a></li>
+                                <li><a class="allMenu" href="#">전체</a></li>
+                                <li><a class="popMenu" href="#">인기</a></li>
+                                <li><a class="followMenu" href="#">팔로우</a></li>
+                                <li><a class="storeMenu" href="#">스토어</a></li>
                             </ul>
                         </div>
                     </nav>
