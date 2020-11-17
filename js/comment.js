@@ -64,6 +64,7 @@ const showComment = () => {
 
     $.ajax({
         url : `http://10.80.161.202:8080/feed/post/${postId}/comments`,
+        //url : 
         tpye : 'GET',
         beforeSend : function(xhr){
             xhr.setRequestHeader("Content-type","application/json");
