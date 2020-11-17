@@ -34,6 +34,7 @@ const changeBtn = () => {
 const profileHeader = () => {
     $.ajax({
         url : `http://10.80.161.202:8080/user/${getUserId('userId')}/posts`,
+        //url : 
         type : 'GET',
         //팔로우가 되었는걸 get하는게 오류뜸
         beforeSend : function(xhr){
@@ -74,6 +75,7 @@ const profileHeader = () => {
 const profileContent = () => {
     $.ajax({
         url : `http://10.80.161.202:8080/user/${getUserId('userId')}/posts`,
+        //url : 
         type : 'GET',
         beforeSend : function(xhr){
             // ajaxCountNum = ajaxCountNum + 1;
