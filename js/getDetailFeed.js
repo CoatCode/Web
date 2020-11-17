@@ -29,8 +29,15 @@ const getDetail = () => {
                         <div class="content">
                             <span>${content}</span>
                         </div>
-                        <div class="tag">
-                            <span>${tag}</span>
+                        <div class='tagWrapper'>
+                            <h4>
+                                ${tag ? `
+                                    <div class="tag">
+                                        ${tag}
+                                    </div>
+                                    `
+                                : `<div></div>`}
+                            </h4>
                         </div>
                         <div class="disuniteLine">
                             <hr>
@@ -103,7 +110,7 @@ const heartEvent = () => { //모든 좋아요 이벤트 관리
             heartUp();
             getHeartState(likeId);
         } else {
-            console.log('down');
+            //console.log('down');
             heartDown();
             getHeartState(likeId);
         }
