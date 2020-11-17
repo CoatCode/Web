@@ -17,7 +17,6 @@ const writeComment = () => {
             type : 'POST',
             data : JSON.stringify(comment),
             beforeSend : function(xhr){
-                ajaxCountNum = ajaxCountNum+1;
                 xhr.setRequestHeader("Content-type","application/json");
                 xhr.setRequestHeader("Authorization",`Bearer ${sessionStorage.getItem('userAccessToken')}`);
             },
@@ -37,28 +36,28 @@ const writeComment = () => {
     });   
 }
 
-const showPostmanInfo = () => {
-    $.ajax({
-        url : ``,
-        success : function(res){
-            res.map((data) => {
-                $('.commentArea').append(`
-                <div class="postManProfileInfo">
-                    <div class="postManProfileImg">
-                        <img src="" alt="">
-                    </div>
-                    <div class="postManName">
-                        <span></span>
-                    </div>
-                </div>
-                <div class="disuniteLine">
-                    <hr>
-                </div>
-                `);
-            });
-        }
-    });
-}
+// const showPostmanInfo = () => {
+//     $.ajax({
+//         url : ``,
+//         success : function(res){
+//             res.map((data) => {
+//                 $('.commentArea').append(`
+//                 <div class="postManProfileInfo">
+//                     <div class="postManProfileImg">
+//                         <img src="" alt="">
+//                     </div>
+//                     <div class="postManName">
+//                         <span></span>
+//                     </div>
+//                 </div>
+//                 <div class="disuniteLine">
+//                     <hr>
+//                 </div>
+//                 `);
+//             });
+//         }
+//     });
+// }
 
 const showComment = () => {
     let postId = getCommentPar('id');
@@ -67,13 +66,12 @@ const showComment = () => {
         url : `http://10.80.161.202:8080/feed/post/${postId}/comments`,
         tpye : 'GET',
         beforeSend : function(xhr){
-            ajaxCountNum = ajaxCountNum + 1;
             xhr.setRequestHeader("Content-type","application/json");
             xhr.setRequestHeader("Authorization",`Bearer ${sessionStorage.getItem('userAccessToken')}`);
         },
         success : function(res){
-            console.log('성공');
-            console.log(res);
+            //console.log('성공');
+            //console.log(res);
             //getCommentTime(res);
             res.map((data) => {
                 $('.viewCommentArea').append(`
@@ -105,45 +103,49 @@ const showComment = () => {
     });
 }
 
-// const modifyComment = () => {
+const modifyComment = () => {
 
-//     $('.modifyCommentBtn').click(function(){
-//         const comment = {
-//             content : $('#commentBox').val(),
-//         };
+    $('.modifyCommentBtn').click(function(){
+        const comment = {
+            content : $('#commentBox').val(),
+        };
 
-//             $.ajax({
-//                 //url : 'BASE_URL/feed/post/{post-id}/comment/{comment-id}'
-//                 url : `http://10.80.161.202:8080/feed/post/${postId}/comment/${commentId}`,
-//                 type : 'PUT',
-//                 data : JSON.stringify(comment),
-//                 beforeSend : function(xhr){
-//                     ajaxCountNum = ajaxCountNum + 1;
-//                     xhr.setRequestHeader('Content-type', 'application/json');
-//                     xhr.setRequestHeader('Authorization', `Bearer ${sessionStorage.getItem('userAccessToken')}`);    
-//                 },
-//                 success : function(){
-//                     console.log('성공');
-//                 },
-//                 error : function(res){
-//                     console.log(res);
-//                 },
-//                 dataType : 'JSON',
-//                 contentType : 'application/json; charset=utf-8'
-//             });
-//     });
-// }
+        $.ajax({
+            //url : 'BASE_URL/feed/post/{post-id}/comment/{comment-id}'
+            url : `http://10.80.161.202:8080/feed/post/${postId}/comment/${commentId}`,
+            type : 'PUT',
+            data : JSON.stringify(comment),
+            beforeSend : function(xhr){
+                ajaxCountNum = ajaxCountNum + 1;
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.setRequestHeader('Authorization', `Bearer ${sessionStorage.getItem('userAccessToken')}`);    
+            },
+            success : function(){
+                console.log('성공');
+            },
+            error : function(res){
+                console.log(res);
+            },
+            dataType : 'JSON',
+            contentType : 'application/json; charset=utf-8'
+        });
+    });
+}
 
 const deleteComment = () => {
-    let postId = getCommentPar('id');
-    let commentId = getCommentPar('comment_id');
+    console.log('동해물과')
+    
+    $('.moreView').click(function(){   
+        let postId = getCommentPar('id');
+        let commentId = getCommentPar('comment_id');
 
-    $('.deleteCommentBtn').click(function(){        
+        console.log(postId);
+        
         $.ajax({
             url : `http://10.80.161.202:8080/feed/post/${postId}/comment/${commentId}`,
             type : 'DELETE',
             beforeSend : function(xhr){
-                ajaxCountNum = ajaxCountNum + 1;
+                //ajaxCountNum = ajaxCountNum + 1;
                 xhr.setRequestHeader('Content-type', 'application/json');
                 xhr.setRequestHeader('Authorization', `Bearer ${sessionStorage.getItem('userAccessToken')}`);    
             },
@@ -179,7 +181,7 @@ const getCommentTime = (timeValue) => {
     (mount > 9 ? '' : '0') + mount, '.',
     (day > 9 ? '' : '0') + day].join('');
 
-    log('과연?', testVal, val ,testVal === val);
+    //log('과연?', testVal, val ,testVal === val);
 
     if(testVal === val) {
         const hour = dateObject.getHours();
