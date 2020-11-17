@@ -135,7 +135,8 @@ const modifyComment = () => {
 const deleteComment = () => {
     console.log('동해물과')
     
-    $('.moreView').click(function(){   
+    $('.moreView').click(function(){  
+        console.log('sss') 
         let postId = getCommentPar('id');
         let commentId = getCommentPar('comment_id');
 
