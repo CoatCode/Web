@@ -17,8 +17,8 @@ const sendUser_Information = () => {
         //log(userData);
 
         $.ajax({
-            url : "http://10.80.161.202:8080/auth/login",
-            //url : "https://coatcode.herokuapp.com/auth/login",
+            //url : "http://10.80.161.202:8080/auth/login",
+            url : "https://coatcode.herokuapp.com/auth/login",
             type : 'POST',
             data : JSON.stringify(userData),
             beforeSend : function(){
@@ -30,6 +30,7 @@ const sendUser_Information = () => {
                     token = res.access_token;
                     expiresAt = res.expires_at;
                     log(`로그인 성공! :)`);
+                    
                     //로그인 성공시 세션에 유저정보 저장
                     sessionStorage.setItem("userAccessToken", token);
                     sessionStorage.setItem("tokenExpirationPeriod", expiresAt);
@@ -48,14 +49,14 @@ const sendUser_Information = () => {
                         success : function(res){
                             console.log(res);
                             //saveUserData();
-                            //saveUserData(res);
+                            saveUserData(res);
                         },
                         error : function(res){
                             console.log(res);
                         }
                     });           
 
-                    window.location.replace('feedPage.html');  
+                    //window.location.replace('feedPage.html');  
                 }
                 else{
                     //엑세스토큰 만료시 리프레시 토큰을 받아옴
@@ -68,8 +69,8 @@ const sendUser_Information = () => {
                     
                     //엑세스토큰 만료시 리프리시 토큰을 보내 엑세스토큰 재발급을 받음
                     $.ajax({
-                        //url : "http://10.80.161.202:8080/auth/renewal-token",
-                        url : 'https://coatcode.herokuapp.com/renewal-token',
+                        url : "http://10.80.161.202:8080/auth/renewal-token",
+                        //url : 'https://coatcode.herokuapp.com/renewal-token',
                         type : 'POST',
                         data : sessionStorage.getItem("userRefreshToken"),
                         beforeSend : function(){
