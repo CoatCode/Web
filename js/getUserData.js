@@ -6,7 +6,6 @@ const getUserData = () => {
 
     $.ajax({
         url : "http://10.80.161.202:8080/user",
-        //url : "http://10.80.161.202:8080/feed/post/7/comments",
         type : "GET",
         beforeSend : function(xhr){
             ajaxCountNum = ajaxCountNum+1;
