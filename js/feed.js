@@ -746,7 +746,7 @@ const heartDown = () => {
     });
 }
 
-//
+//페이지 이동
 
 const movePage = () => {
     $('.writeImg').click(function(){
