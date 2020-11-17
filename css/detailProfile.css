@@ -262,7 +262,7 @@ body{
     text-align: center;
 }
 
-.nav .navMenu {
+.nav a {
     text-decoration: none;
     color: rgba(51, 51, 51, 0.5);
     display: block;
@@ -272,6 +272,6 @@ body{
     font-family: Noto Sans;
 }
 
-.navMenu:hover{
+a:hover{
     color: #333333;
 }
