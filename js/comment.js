@@ -64,7 +64,7 @@ const showComment = () => {
 
     $.ajax({
         url : `http://10.80.161.202:8080/feed/post/${postId}/comments`,
-        //url : 
+        //url : `https://coatcode.herokuapp.com/feed/post${postId}/comments`,
         tpye : 'GET',
         beforeSend : function(xhr){
             xhr.setRequestHeader("Content-type","application/json");
@@ -114,6 +114,7 @@ const modifyComment = () => {
         $.ajax({
             //url : 'BASE_URL/feed/post/{post-id}/comment/{comment-id}'
             url : `http://10.80.161.202:8080/feed/post/${postId}/comment/${commentId}`,
+            //url : `https://coatcode.herokuapp.com/feed/post/${postId}/comment/${commentId]`
             type : 'PUT',
             data : JSON.stringify(comment),
             beforeSend : function(xhr){
@@ -133,8 +134,8 @@ const modifyComment = () => {
     });
 }
 
-const deleteComment = () => {
-    console.log('동해물과')
+const deleteComment = () => {   
+    console.log('안녕')
     
     $('.moreView').click(function(){  
         console.log('sss') 
@@ -145,6 +146,7 @@ const deleteComment = () => {
         
         $.ajax({
             url : `http://10.80.161.202:8080/feed/post/${postId}/comment/${commentId}`,
+            //url : `https://coatcode.herokuapp.com/feed/post${postId}/comment${commentId}`
             type : 'DELETE',
             beforeSend : function(xhr){
                 //ajaxCountNum = ajaxCountNum + 1;
