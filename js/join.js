@@ -17,8 +17,8 @@ const sendUser_Information = () => {
         //log(userData);
 
         $.ajax({
-            //url : "http://10.80.161.202:8080/auth/login",
-            url : "https://coatcode.herokuapp.com/auth/login",
+            url : "http://10.80.161.202:8080/auth/login",
+            //url : "https://coatcode.herokuapp.com/auth/login",
             type : 'POST',
             data : JSON.stringify(userData),
             beforeSend : function(){
@@ -56,7 +56,7 @@ const sendUser_Information = () => {
                         }
                     });           
 
-                    //window.location.replace('feedPage.html');  
+                    window.location.replace('feedPage.html');  
                 }
                 else{
                     //엑세스토큰 만료시 리프레시 토큰을 받아옴
