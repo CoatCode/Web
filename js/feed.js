@@ -10,7 +10,8 @@ const getFeed = (id) => {
     isLoading = true;
 
     $.ajax({
-        url : `http://10.80.161.202:8080/feed/post/all`,
+        // url : `http://10.80.161.202:8080/feed/post/all`,
+        url : `https://coatcode.herokuapp.com/feed/post/all`,
         type : 'GET',
         beforeSend : function(xhr){
             ajaxCountNum = ajaxCountNum+1;
