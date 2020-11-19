@@ -7,7 +7,8 @@ const getDetail = () => {
     let postId = getParameterByName('id');
     console.log(postId);
     $.ajax({
-        url : `http://10.80.161.202:8080/feed/post/${postId}`,
+        // url : `http://10.80.161.202:8080/feed/post/${postId}`,
+        url : `https://coatcode.herokuapp.com/feed/post${postId}`,
         type : 'GET',
         beforeSend : function(xhr){
             ajaxCountNum = ajaxCountNum+1;
