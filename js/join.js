@@ -17,8 +17,8 @@ const sendUser_Information = () => {
         //log(userData);
 
         $.ajax({
-            url : "http://10.80.161.202:8080/auth/login",
-            //url : "https://coatcode.herokuapp.com/auth/login",
+            // url : "http://10.80.161.202:8080/auth/login",
+            url : "https://coatcode.herokuapp.com/auth/login",
             type : 'POST',
             data : JSON.stringify(userData),
             beforeSend : function(){
