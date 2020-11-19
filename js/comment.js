@@ -4,8 +4,17 @@ let ajaxCountNum = 0; //ajax가 몇번 실행되는지 카운트하는 변수
 let ajaxLastNum = ajaxCountNum; //마지막이 몇번인지 확인하는 변수
 let clickCount = 1;
 
+const getCommentPar = (name) => {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    const regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+const postId = getCommentPar('id');
+
 const writeComment = () => {
-    let postId = getCommentPar('id');
+    // const postId = getCommentPar('id');
 
     $('.submitBtn').click(function(){
         const comment = {
@@ -60,8 +69,6 @@ const writeComment = () => {
 // }
 
 const showComment = () => {
-    let postId = getCommentPar('id');
-
     $.ajax({
         url : `http://10.80.161.202:8080/feed/post/${postId}/comments`,
         //url : `https://coatcode.herokuapp.com/feed/post${postId}/comments`,
@@ -71,11 +78,9 @@ const showComment = () => {
             xhr.setRequestHeader("Authorization",`Bearer ${sessionStorage.getItem('userAccessToken')}`);
         },
         success : function(res){
-            //console.log('성공');
-            //console.log(res);
-            //getCommentTime(res);
-            res.map((data) => {
-                $('.viewCommentArea').append(`
+            let html = "";
+            res.map(data => {
+                html+=`
                     <div>
                         <div class="commenterProfile">
                             <img src="${data.owner.profile}">
@@ -89,12 +94,13 @@ const showComment = () => {
                             </div>
                             </div>
                         <div class="commetMoreView">
-                            <img class="moreView" src="/picture/Icon/more.png" alt="">
+                            <img class="moreView" src="/picture/Icon/more.png" moreId="${data.comment_id}" alt="">
                         </div>
                     </div>
-                `
-                );
+                `;
             });
+            
+            $('.viewCommentArea').html(html);
         },
         error : function(res){
             console.log(res);
@@ -104,66 +110,35 @@ const showComment = () => {
     });
 }
 
-const modifyComment = () => {
+// const modifyComment = () => {
 
-    $('.modifyCommentBtn').click(function(){
-        const comment = {
-            content : $('#commentBox').val(),
-        };
+//     $('.modifyCommentBtn').click(function(){
+//         const comment = {
+//             content : $('#commentBox').val(),
+//         };
 
-        $.ajax({
-            //url : 'BASE_URL/feed/post/{post-id}/comment/{comment-id}'
-            url : `http://10.80.161.202:8080/feed/post/${postId}/comment/${commentId}`,
-            //url : `https://coatcode.herokuapp.com/feed/post/${postId}/comment/${commentId]`
-            type : 'PUT',
-            data : JSON.stringify(comment),
-            beforeSend : function(xhr){
-                ajaxCountNum = ajaxCountNum + 1;
-                xhr.setRequestHeader('Content-type', 'application/json');
-                xhr.setRequestHeader('Authorization', `Bearer ${sessionStorage.getItem('userAccessToken')}`);    
-            },
-            success : function(){
-                console.log('성공');
-            },
-            error : function(res){
-                console.log(res);
-            },
-            dataType : 'JSON',
-            contentType : 'application/json; charset=utf-8'
-        });
-    });
-}
-
-const deleteComment = () => {   
-    console.log('안녕')
-    
-    $('.moreView').click(function(){  
-        console.log('sss') 
-        let postId = getCommentPar('id');
-        let commentId = getCommentPar('comment_id');
-
-        console.log(postId);
-        
-        $.ajax({
-            url : `http://10.80.161.202:8080/feed/post/${postId}/comment/${commentId}`,
-            //url : `https://coatcode.herokuapp.com/feed/post${postId}/comment${commentId}`
-            type : 'DELETE',
-            beforeSend : function(xhr){
-                //ajaxCountNum = ajaxCountNum + 1;
-                xhr.setRequestHeader('Content-type', 'application/json');
-                xhr.setRequestHeader('Authorization', `Bearer ${sessionStorage.getItem('userAccessToken')}`);    
-            },
-            success : function(){
-                console.log('성공');
-            },
-            error : function(res){
-                console.log(res);
-            },
-            dataType : 'JSON',
-            contentType : 'application/json; charset=utf-8'
-        });
-    });
-}
+//         $.ajax({
+//             //url : 'BASE_URL/feed/post/{post-id}/comment/{comment-id}'
+//             url : `http://10.80.161.202:8080/feed/post/${postId}/comment/${commentId}`,
+//             //url : `https://coatcode.herokuapp.com/feed/post/${postId}/comment/${commentId]`
+//             type : 'PUT',
+//             data : JSON.stringify(comment),
+//             beforeSend : function(xhr){
+//                 ajaxCountNum = ajaxCountNum + 1;
+//                 xhr.setRequestHeader('Content-type', 'application/json');
+//                 xhr.setRequestHeader('Authorization', `Bearer ${sessionStorage.getItem('userAccessToken')}`);    
+//             },
+//             success : function(){
+//                 console.log('성공');
+//             },
+//             error : function(res){
+//                 console.log(res);
+//             },
+//             dataType : 'JSON',
+//             contentType : 'application/json; charset=utf-8'
+//         });
+//     });
+// }
 
 const getCommentTime = (timeValue) => {
     const today = new Date();
@@ -200,18 +175,70 @@ const getCommentTime = (timeValue) => {
     }
 }
 
-const getCommentPar = (name) => {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    const regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+const commentEvent = () => {
+    $(document)
+    .on('click', '.moreView', function() {
+        const commentId = $(this).attr('moreId');
+
+        console.log(postId, commentId);
+        
+        $.ajax({
+            url : `http://10.80.161.202:8080/feed/post/${postId}/comment/${commentId}`,
+            //url : `https://coatcode.herokuapp.com/feed/post${postId}/comment${commentId}`
+            type : 'DELETE',
+            beforeSend : function(xhr){
+                //ajaxCountNum = ajaxCountNum + 1;
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.setRequestHeader('Authorization', `Bearer ${sessionStorage.getItem('userAccessToken')}`);    
+            },
+            success : function(){
+                console.log('성공');
+            },
+            error : function(res){
+                console.log(res);
+            },
+            dataType : 'JSON',
+            contentType : 'application/json; charset=utf-8'
+        });
+
+        showComment();
+    })
+    .on('click', '.submitBtn', function() {
+        const comment = {
+            content : $('#commentBox').val(),
+        };
+
+        $.ajax({
+            url : `http://10.80.161.202:8080/feed/post/${postId}/comment`,
+            type : 'POST',
+            data : JSON.stringify(comment),
+            beforeSend : function(xhr){
+                ajaxCountNum = ajaxCountNum + 1;
+                xhr.setRequestHeader("Content-type","application/json");
+                xhr.setRequestHeader("Authorization",`Bearer ${sessionStorage.getItem('userAccessToken')}`);
+            },
+            success : function(){
+                log('성공');
+            },
+            error : function(res){
+                log(res);
+            },
+            dataType : 'JSON',
+            contentType : "application/json; charset=utf-8",
+        });
+
+        log(comment);
+
+        // window.location.reload();
+        functionEXE();
+    })
 }
 
 const functionEXE = () => {
-    writeComment();
     showComment();
-    //modifyComment();
-    deleteComment();
+    commentEvent();
 }
 
-functionEXE();
+$(() => {
+    functionEXE();
+})
