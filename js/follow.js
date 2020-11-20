@@ -45,6 +45,8 @@ const profileHeader = () => {
         success : function(res){
             console.log('성공');
             console.log(res);
+            description
+            const des = sessionStorage.getItem('userAccess')
             // //getCommentTime(res);
             res.map(({owner}) => {
                 $('.userProfileArea').html(`
@@ -62,6 +64,10 @@ const profileHeader = () => {
                 $('.following').html(`
                     <span>팔로잉 ${owner.following}</span>
                 `);
+
+                $('.introduce').html(`
+                    <span>${des}</span>
+                `)
             });
         },
         error : function(res){
