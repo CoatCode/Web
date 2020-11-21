@@ -227,6 +227,10 @@ const getFollowFeed = (id) => {
     isLoading = true;
 
     $('.followMenu').click(function(){
+        $('.feedArea').each(function(){
+            this.reset();
+        });
+
         $.ajax({
             url : `http://10.80.161.202:8080/feed/post/follow`,
             type : 'GET',
@@ -234,12 +238,10 @@ const getFollowFeed = (id) => {
                 ajaxCountNum = ajaxCountNum+1;
             },
             success : function(res){
-                console.log(isLoading)
+                console.log(isLoading);
                 
-                isLoading = false;
-                //loading();
-    
-                //console.log('게시물 불러오기 성공');
+                // isLoading = false;
+
                 console.log(res);
                 
                 res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {
@@ -442,9 +444,13 @@ const getFollowFeed = (id) => {
 const getPopularFeed = (id) => {
     let ajaxCountNum = 0;
     let ajaxLastNum = ajaxCountNum;
-    isLoading = true;
+    // isLoading = true;
 
     $('.followMenu').click(function(){
+        $('.feedArea').each(function(){
+            this.reset();
+        });
+
         $.ajax({
             url : `http://10.80.161.202:8080/feed/post/pop`,
             type : 'GET',
@@ -452,9 +458,9 @@ const getPopularFeed = (id) => {
                 ajaxCountNum = ajaxCountNum+1;
             },
             success : function(res){
-                console.log(isLoading)
+                // console.log(isLoading)
                 
-                isLoading = false;
+                // isLoading = false;
                 //loading();
     
                 //console.log('게시물 불러오기 성공');
@@ -547,7 +553,7 @@ const getPopularFeed = (id) => {
                 console.log(err);
             }
         });
-    
+        
         let getId = 1;
     
         $(window).scroll(function() {
