@@ -17,12 +17,6 @@ const getFeed = (id) => {
             ajaxCountNum = ajaxCountNum+1;
         },
         success : function(res){
-            console.log(isLoading)
-            
-            isLoading = false;
-            //loading();
-
-            //console.log('게시물 불러오기 성공');
             console.log(res);
             
             res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {
@@ -30,7 +24,7 @@ const getFeed = (id) => {
                     <div class='feed'>
                         <div class='feedHead'>
                             <div class='postmanProfile'>
-                                    <img src= "${owner.image}">                     
+                                    <img src= "${owner.profile}">                     
                             </div>
                             <div class='postmanName'>
                                 <div class= 'postmanNameText'>${owner.username}</div>
@@ -238,10 +232,6 @@ const getFollowFeed = (id) => {
                 ajaxCountNum = ajaxCountNum+1;
             },
             success : function(res){
-                console.log(isLoading);
-                
-                // isLoading = false;
-
                 console.log(res);
                 
                 res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {
@@ -249,7 +239,7 @@ const getFollowFeed = (id) => {
                         <div class='feed'>
                             <div class='feedHead'>
                                 <div class='postmanProfile'>
-                                        <img src= "${owner.image}">                     
+                                        <img src= "${owner.profile}">                     
                                 </div>
                                 <div class='postmanName'>
                                     <div class= 'postmanNameText'>${owner.username}</div>
@@ -458,20 +448,14 @@ const getPopularFeed = (id) => {
                 ajaxCountNum = ajaxCountNum+1;
             },
             success : function(res){
-                // console.log(isLoading)
-                
-                // isLoading = false;
-                //loading();
-    
-                //console.log('게시물 불러오기 성공');
-                console.log(res);
+                // console.log(res);
                 
                 res.map(({id, owner, image_urls, title, content, tag, comment_preview}) => {
                     $('.feedArea').append(`
                         <div class='feed'>
                             <div class='feedHead'>
                                 <div class='postmanProfile'>
-                                        <img src= "${owner.image}">                     
+                                        <img src= "${owner.profile}">                     
                                 </div>
                                 <div class='postmanName'>
                                     <div class= 'postmanNameText'>${owner.username}</div>
@@ -705,7 +689,7 @@ const heartEvent = () => { //모든 좋아요 이벤트 관리
             heartDown();
             getHeartState(likeId);
         }
-        // heartDown();
+        heartDown();
         // $('.likeImg').html(`<img src="/picture/Icon/heart.png">`);
         // $('.likeImg').html(`<img src="/picture/Icon/heart (2).png">`);
     });
