@@ -59,7 +59,7 @@ const getDetail = () => {
 
                 $('.postManProfileImg').html(`
                     <a href="profileDetail.html?userId=${owner.id}">
-                        <img src="${owner.image}" alt="">
+                        <img src="${owner.profile}" alt="">
                     </a>
                 `);
                 
