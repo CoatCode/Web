@@ -2,7 +2,7 @@ const search = () => {
     let ajaxCountNum = 0;
     let ajaxLastNum = ajaxCountNum;
 
-    const searchData = {}
+    const searchData = $(".search").val();
 
     $.ajax({
         // url : "http://10.80.161.202:8080/user",
