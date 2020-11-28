@@ -7,7 +7,7 @@ const search = () => {
     $.ajax({
         // url : "http://10.80.161.202:8080/user",
         url : "https://coatcode.herokuapp.com/user",
-        type : "GET",
+        type : "POST",
         data : JSON.stringify(searchData),
         beforeSend : function(xhr){
             ajaxCountNum = ajaxCountNum+1;
@@ -16,6 +16,7 @@ const search = () => {
         },
         success : function(res){
            console.log(res);
+
         },
         error : function(res){
             console.log(res);
