@@ -17,7 +17,7 @@ const search = () => {
         success : function(res){
            console.log(res);
 
-           res.map()
+        //    res.map()
         },
         error : function(res){
             console.log(res);
