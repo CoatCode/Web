@@ -13,7 +13,7 @@ const Detail = () => {
                     <div className="title"></div>
                     <div className="icon">
                         <img></img>
-                    </div>
+                    </div>  
                 </div>
                 <div className="explanationArea">
                     <span></span>
