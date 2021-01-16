@@ -3,7 +3,7 @@ import react from 'react'
 const StoreDetail = () => {
     return(
         <div className="contentContainer">
-            <div className="imgContainer">
+            <div className="imgContainer">          
                 <img className="tumnailPicture"></img>
             </div>
             <div className="additionalImg_Area">
@@ -35,3 +35,5 @@ const StoreDetail = () => {
         </div>
     );
 }
+
+export default StoreDetail;
